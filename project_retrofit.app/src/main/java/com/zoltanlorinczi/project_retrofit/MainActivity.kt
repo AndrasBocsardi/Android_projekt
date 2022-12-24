@@ -3,6 +3,7 @@ package com.zoltanlorinczi.project_retrofit
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import androidx.navigation.findNavController
 
@@ -30,7 +31,6 @@ class MainActivity : AppCompatActivity() {
 
         val navView: BottomNavigationView = binding.bottomNavigationView
 
-
         val navController = findNavController(R.id.nav_host_fragment)
 
         val appBarConfiguration = AppBarConfiguration(
@@ -46,24 +46,6 @@ class MainActivity : AppCompatActivity() {
 
         navView.setupWithNavController(navController)
 
-//        navView.setOnNavigationItemSelectedListener {
-//            when(it.itemId){
-//                R.id.activitiesFragment -> {
-//                    navController.navigate(R.id.activitiesFragment)
-//                }
-//                R.id.TasksListFragment -> {
-//                    navController.navigate(R.id.TasksListFragment)
-//                }
-//                R.id.myGroupsFragment -> {
-//                    navController.navigate(R.id.myGroupsFragment)
-//                }
-//                R.id.profileFragment -> {
-//                    navController.navigate(R.id.profileFragment)
-//                }
-//            }
-//            true
-//        }
-
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.loginFragment -> {
@@ -77,36 +59,14 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        val actionBar = supportActionBar
 
-
+        if(actionBar != null){
+            actionBar.setDisplayHomeAsUpEnabled(true)
+        }
 
 
     }
-
-
-
-
-//    private fun initBottomNav(){
-//        bottomNav.setOnNavigationItemSelectedListener() {item ->
-//            when (item.itemId){
-//                R.id.activitiesFragment ->{
-//                    Navigator.replaceFragment(activitiesFragment(), true)
-//                    true
-//                }
-//            }
-//        }
-//    }
-//
-//    fun replaceFragment(newFragment: Fragment, addToBackStack: Boolean = false) {
-//        if (fragmentManager != null) {
-//            val transaction = fragmentManager!!.beginTransaction()
-//            transaction.replace(fragmentContainerId!!, newFragment)
-//            if(addToBackStack){
-//                transaction.addToBackStack(newFragment.javaClass.name)
-//            }
-//            transaction.commit()
-//        }
-//    }
 
     override fun onStart() {
         super.onStart()
@@ -122,4 +82,15 @@ class MainActivity : AppCompatActivity() {
         super.onStop()
         Log.d(TAG, "onStop() called!")
     }
+
+    override fun onContextItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                finish()
+                return true
+            }
+        }
+        return super.onContextItemSelected(item)
+    }
+
 }

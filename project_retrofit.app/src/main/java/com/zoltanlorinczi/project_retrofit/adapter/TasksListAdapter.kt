@@ -2,6 +2,7 @@ package com.zoltanlorinczi.project_retrofit.adapter
 
 import android.content.Context
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,10 +23,12 @@ class TasksListAdapter(
     private val listener: OnItemClickListener,
     private val listener2: OnItemLongClickListener
 ) :
+
     RecyclerView.Adapter<TasksListAdapter.SimpleDataViewHolder>() {
 
     interface OnItemClickListener {
         fun onItemClick(position: Int)
+
     }
 
     interface OnItemLongClickListener {
@@ -36,7 +39,7 @@ class TasksListAdapter(
         View.OnClickListener, View.OnLongClickListener {
 
         override fun onClick(v: View?) {
-            TODO("Not yet implemented")
+
         }
 
         override fun onLongClick(v: View?): Boolean {
@@ -47,11 +50,12 @@ class TasksListAdapter(
     // 1. user defined ViewHolder type - Embedded class!
     inner class DataViewHolder(itemView: View) : SimpleDataViewHolder(itemView),
         View.OnClickListener, View.OnLongClickListener {
+
         val taskTitleTextView: TextView = itemView.findViewById(R.id.task_title_view)
         val taskDescriptionTextView: TextView = itemView.findViewById(R.id.task_description_view)
         val taskPriorityTextView: TextView = itemView.findViewById(R.id.task_priority_view)
-        val taskOwnerProfileImage: ImageView =
-            itemView.findViewById(R.id.task_owner_profile_image_view)
+//        val taskOwnerProfileImage: ImageView =
+//            itemView.findViewById(R.id.task_owner_profile_image_view)
 
         init {
             itemView.setOnClickListener(this)
@@ -69,6 +73,10 @@ class TasksListAdapter(
             listener2.onItemLongClick(currentPosition)
             return true
         }
+    }
+
+    fun setOnItemClickListener(listener: OnItemClickListener){
+        
     }
 
     // 2. Called only a few times = number of items on screen + a few more ones
@@ -122,12 +130,12 @@ class TasksListAdapter(
                 }
             }
 
-            Glide.with(context)
-                .load(R.drawable.ic_launcher_background)
-                //.load("https://devinit.org/assets/img/profile-fallback.e7a6f788830c.jpg")
-                //.placeholder(R.drawable.ic_launcher_background)
-                .override(100, 100)
-                .into(complexHolder.taskOwnerProfileImage)
+//            Glide.with(context)
+//                .load(R.drawable.ic_launcher_background)
+////                .load("https://devinit.org/assets/img/profile-fallback.e7a6f788830c.jpg")
+////                .placeholder(R.drawable.ic_launcher_background)
+//                .override(100, 100)
+//                .into(complexHolder.taskOwnerProfileImage)
         }
     }
 

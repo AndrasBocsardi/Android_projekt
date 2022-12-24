@@ -47,6 +47,8 @@ class TasksListFragment : Fragment(R.layout.fragment_tasks_list), TasksListAdapt
         val view = inflater.inflate(R.layout.fragment_tasks_list, container, false)
         recyclerView = view.findViewById(R.id.recycler_view)
         setupRecyclerView()
+
+
         tasksViewModel.products.observe(viewLifecycleOwner) {
             Log.d(TAG, "Tasks list = $it")
             adapter.setData(tasksViewModel.products.value as ArrayList<TaskResponse>)
