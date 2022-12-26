@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.MutableLiveData
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.NavHostFragment.findNavController
@@ -39,7 +40,6 @@ class TasksListAdapter(
 
     interface OnItemClickListener {
         fun onItemClick(position: Int)
-
     }
 
     interface OnItemLongClickListener {
@@ -74,7 +74,7 @@ class TasksListAdapter(
 
         override fun onClick(p0: View?) {
             val currentPosition = this.adapterPosition
-            listener.onItemClick(currentPosition)
+//            listener.onItemClick(currentPosition)
             clickListener.onCardClicked(list[currentPosition])
             itemView.findNavController().navigate(R.id.action_listFragment_to_taskDetailFragment)
         }

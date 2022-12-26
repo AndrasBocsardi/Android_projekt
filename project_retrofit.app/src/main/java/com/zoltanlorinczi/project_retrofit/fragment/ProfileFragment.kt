@@ -6,15 +6,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.zoltanlorinczi.project_retorfit.R
 import com.zoltanlorinczi.project_retrofit.api.ThreeTrackerRepository
 import com.zoltanlorinczi.project_retrofit.api.model.TaskResponse
 import com.zoltanlorinczi.project_retrofit.viewmodel.ProfileViewModel
 import com.zoltanlorinczi.project_retrofit.viewmodel.ProfileViewModelFactory
+import kotlinx.android.synthetic.main.fragment_login.*
+import kotlinx.android.synthetic.main.fragment_profile.*
 
 
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
@@ -24,6 +28,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     }
 
     private lateinit var profileViewModel: ProfileViewModel
+    private lateinit var logOutButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,6 +74,9 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                 .into(profilPicture)
         }
 
+        logOutButton = view.findViewById(R.id.profileLogoutButton)
+
+        logOutButton.setOnClickListener { findNavController().navigate(R.id.action_profileFragment_to_loginFragment) }
 
         return view
     }
