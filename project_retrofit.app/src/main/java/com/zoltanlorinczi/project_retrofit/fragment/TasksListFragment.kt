@@ -5,9 +5,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -33,8 +35,10 @@ class TasksListFragment : Fragment(R.layout.fragment_tasks_list), TasksListAdapt
     private lateinit var tasksViewModel: TasksViewModel
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: TasksListAdapter
+    private lateinit var newTaskButton: Button
 
     private val taskItemClickListener = object : TaskItemClickListener{
+
         override fun onCardClicked(task: TaskResponse) {
             tasksViewModel.selectForDetail(task)
         }
@@ -43,7 +47,7 @@ class TasksListFragment : Fragment(R.layout.fragment_tasks_list), TasksListAdapt
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val factory = TasksViewModelFactory(ThreeTrackerRepository())
-        tasksViewModel = ViewModelProvider(this, factory)[TasksViewModel::class.java]
+        tasksViewModel = ViewModelProvider(requireActivity(), factory)[TasksViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -53,6 +57,8 @@ class TasksListFragment : Fragment(R.layout.fragment_tasks_list), TasksListAdapt
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_tasks_list, container, false)
+
+
         recyclerView = view.findViewById(R.id.recycler_view)
         setupRecyclerView()
 
@@ -62,6 +68,7 @@ class TasksListFragment : Fragment(R.layout.fragment_tasks_list), TasksListAdapt
             adapter.setData(tasksViewModel.tasks.value as ArrayList<TaskResponse>)
             adapter.notifyDataSetChanged()
         }
+
 
         return view
     }

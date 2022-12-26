@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -67,14 +68,15 @@ class TasksListAdapter(
         val taskPriorityTextView: TextView = itemView.findViewById(R.id.task_priority_view)
 
 
+
         init {
             itemView.setOnClickListener(this)
             itemView.setOnLongClickListener(this)
+
         }
 
         override fun onClick(p0: View?) {
             val currentPosition = this.adapterPosition
-//            listener.onItemClick(currentPosition)
             clickListener.onCardClicked(list[currentPosition])
             itemView.findNavController().navigate(R.id.action_listFragment_to_taskDetailFragment)
         }
@@ -95,7 +97,10 @@ class TasksListAdapter(
                 val itemView = LayoutInflater.from(parent.context)
                     .inflate(R.layout.simple_task_list_item, parent, false)
 
+
+
                 SimpleDataViewHolder(itemView)
+
 
             }
             TaskListItemType.COMPLEX.value -> {

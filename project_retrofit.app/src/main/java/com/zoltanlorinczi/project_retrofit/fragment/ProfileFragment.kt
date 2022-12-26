@@ -1,5 +1,6 @@
 package com.zoltanlorinczi.project_retrofit.fragment
 
+import android.graphics.drawable.Icon
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -75,8 +76,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         }
 
         logOutButton = view.findViewById(R.id.profileLogoutButton)
-
-        logOutButton.setOnClickListener { findNavController().navigate(R.id.action_profileFragment_to_loginFragment) }
+        logOutButton.setOnClickListener { findNavController().navigate(R.id.loginFragment) }
 
         return view
     }

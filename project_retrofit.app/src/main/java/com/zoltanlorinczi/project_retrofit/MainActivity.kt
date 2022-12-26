@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import android.widget.Button
 import androidx.navigation.findNavController
 
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -33,16 +34,16 @@ class MainActivity : AppCompatActivity() {
 
         val navController = findNavController(R.id.nav_host_fragment)
 
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.activitiesFragment,
-                R.id.listFragment,
-                R.id.myGroupsFragment,
-                R.id.profileFragment
-
-            )
-        )
-        setupActionBarWithNavController(navController, appBarConfiguration)
+//        val appBarConfiguration = AppBarConfiguration(
+//            setOf(
+//                R.id.activitiesFragment,
+//                R.id.listFragment,
+//                R.id.myGroupsFragment,
+//                R.id.profileFragment
+//
+//            )
+//        )
+//        setupActionBarWithNavController(navController, appBarConfiguration)
 
         navView.setupWithNavController(navController)
 
