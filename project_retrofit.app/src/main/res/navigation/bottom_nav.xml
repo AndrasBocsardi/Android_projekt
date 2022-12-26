@@ -9,7 +9,11 @@
         android:id="@+id/listFragment"
         android:name="com.zoltanlorinczi.project_retrofit.fragment.TasksListFragment"
         android:label="ListFragment"
-        tools:layout="@layout/fragment_tasks_list"/>
+        tools:layout="@layout/fragment_tasks_list">
+        <action
+            android:id="@+id/action_listFragment_to_taskDetailFragment"
+            app:destination="@id/taskDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/activitiesFragment"
         android:name="com.zoltanlorinczi.project_retrofit.fragment.ActivitiesFragment"
@@ -33,4 +37,8 @@
             android:id="@+id/action_loginFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/taskDetailFragment"
+        android:name="com.zoltanlorinczi.project_retrofit.fragment.TaskDetailFragment"
+        android:label="TaskDetailFragment" />
 </navigation>

@@ -8,10 +8,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.zoltanlorinczi.project_retorfit.R
 import com.zoltanlorinczi.project_retrofit.api.model.TaskResponse
+import androidx.navigation.fragment.findNavController
+import com.zoltanlorinczi.project_retrofit.fragment.LoginFragment
+import com.zoltanlorinczi.project_retrofit.viewmodel.TasksViewModel
+import interfaces.TaskItemClickListener
+
 
 /**
  * Author:  Zoltan Lorinczi
@@ -21,7 +30,9 @@ class TasksListAdapter(
     private var list: ArrayList<TaskResponse>,
     private val context: Context,
     private val listener: OnItemClickListener,
-    private val listener2: OnItemLongClickListener
+    private val listener2: OnItemLongClickListener,
+    private val clickListener: TaskItemClickListener
+
 ) :
 
     RecyclerView.Adapter<TasksListAdapter.SimpleDataViewHolder>() {
@@ -54,8 +65,7 @@ class TasksListAdapter(
         val taskTitleTextView: TextView = itemView.findViewById(R.id.task_title_view)
         val taskDescriptionTextView: TextView = itemView.findViewById(R.id.task_description_view)
         val taskPriorityTextView: TextView = itemView.findViewById(R.id.task_priority_view)
-//        val taskOwnerProfileImage: ImageView =
-//            itemView.findViewById(R.id.task_owner_profile_image_view)
+
 
         init {
             itemView.setOnClickListener(this)
@@ -65,7 +75,8 @@ class TasksListAdapter(
         override fun onClick(p0: View?) {
             val currentPosition = this.adapterPosition
             listener.onItemClick(currentPosition)
-
+            clickListener.onCardClicked(list[currentPosition])
+            itemView.findNavController().navigate(R.id.action_listFragment_to_taskDetailFragment)
         }
 
         override fun onLongClick(p0: View?): Boolean {
@@ -75,17 +86,17 @@ class TasksListAdapter(
         }
     }
 
-    fun setOnItemClickListener(listener: OnItemClickListener){
-        
-    }
 
-    // 2. Called only a few times = number of items on screen + a few more ones
+   //  2. Called only a few times = number of items on screen + a few more ones
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SimpleDataViewHolder {
         return when (viewType) {
             TaskListItemType.SIMPLE.value -> {
+
                 val itemView = LayoutInflater.from(parent.context)
                     .inflate(R.layout.simple_task_list_item, parent, false)
+
                 SimpleDataViewHolder(itemView)
+
             }
             TaskListItemType.COMPLEX.value -> {
                 val itemView = LayoutInflater.from(parent.context)
@@ -98,6 +109,8 @@ class TasksListAdapter(
         }
 
     }
+
+
 
     override fun getItemViewType(position: Int): Int {
         val currentItem = list[position]
@@ -115,8 +128,10 @@ class TasksListAdapter(
             val complexHolder = (holder as DataViewHolder)
             val currentItem = list[position]
 
+
             complexHolder.taskTitleTextView.text = currentItem.title
             complexHolder.taskDescriptionTextView.text = currentItem.description
+
 
             when (currentItem.priority) {
                 0 -> {
@@ -130,12 +145,6 @@ class TasksListAdapter(
                 }
             }
 
-//            Glide.with(context)
-//                .load(R.drawable.ic_launcher_background)
-////                .load("https://devinit.org/assets/img/profile-fallback.e7a6f788830c.jpg")
-////                .placeholder(R.drawable.ic_launcher_background)
-//                .override(100, 100)
-//                .into(complexHolder.taskOwnerProfileImage)
         }
     }
 

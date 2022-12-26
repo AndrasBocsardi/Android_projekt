@@ -1,12 +1,14 @@
 package com.zoltanlorinczi.project_retrofit.fragment
 
 import android.os.Bundle
+import android.text.TextUtils.replace
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigator
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +18,7 @@ import com.zoltanlorinczi.project_retrofit.api.ThreeTrackerRepository
 import com.zoltanlorinczi.project_retrofit.api.model.TaskResponse
 import com.zoltanlorinczi.project_retrofit.viewmodel.TasksViewModel
 import com.zoltanlorinczi.project_retrofit.viewmodel.TasksViewModelFactory
+import interfaces.TaskItemClickListener
 
 /**
  * Author:  Zoltan Lorinczi
@@ -31,6 +34,12 @@ class TasksListFragment : Fragment(R.layout.fragment_tasks_list), TasksListAdapt
     private lateinit var tasksViewModel: TasksViewModel
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: TasksListAdapter
+
+    private val taskItemClickListener = object : TaskItemClickListener{
+        override fun onCardClicked(task: TaskResponse) {
+            tasksViewModel.selectForDetail(task)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,9 +58,9 @@ class TasksListFragment : Fragment(R.layout.fragment_tasks_list), TasksListAdapt
         setupRecyclerView()
 
 
-        tasksViewModel.products.observe(viewLifecycleOwner) {
+        tasksViewModel.tasks.observe(viewLifecycleOwner) {
             Log.d(TAG, "Tasks list = $it")
-            adapter.setData(tasksViewModel.products.value as ArrayList<TaskResponse>)
+            adapter.setData(tasksViewModel.tasks.value as ArrayList<TaskResponse>)
             adapter.notifyDataSetChanged()
         }
 
@@ -59,7 +68,7 @@ class TasksListFragment : Fragment(R.layout.fragment_tasks_list), TasksListAdapt
     }
 
     private fun setupRecyclerView() {
-        adapter = TasksListAdapter(ArrayList(), requireContext(), this, this)
+        adapter = TasksListAdapter(ArrayList(), requireContext(), this, this,taskItemClickListener)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this.context)
         recyclerView.addItemDecoration(
@@ -79,3 +88,4 @@ class TasksListFragment : Fragment(R.layout.fragment_tasks_list), TasksListAdapt
 //        TODO("Not yet implemented")
     }
 }
+

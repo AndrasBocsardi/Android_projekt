@@ -20,20 +20,20 @@ class TasksViewModel(private val repository: ThreeTrackerRepository) : ViewModel
         val TAG: String = javaClass.simpleName
     }
 
-    var products: MutableLiveData<List<TaskResponse>> = MutableLiveData()
+    var tasks: MutableLiveData<List<TaskResponse>> = MutableLiveData()
 
     var selectedForDetail: TaskResponse = TaskResponse(
-        0,
-        "",
-        "",
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        ""
+            0,
+            "",
+            "",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            ""
     )
 
     init {
@@ -56,7 +56,7 @@ class TasksViewModel(private val repository: ThreeTrackerRepository) : ViewModel
 
                     val tasksList = response.body()
                     tasksList?.let {
-                        products.value = tasksList
+                        tasks.value = tasksList
                     }
                 } else {
                     Log.d(TAG, "Get tasks error response: ${response?.errorBody()}")
@@ -68,7 +68,7 @@ class TasksViewModel(private val repository: ThreeTrackerRepository) : ViewModel
         }
     }
 
-    fun selectForDetail(task: TaskResponse) {
+    fun selectForDetail(task:TaskResponse) {
         selectedForDetail = task
     }
 }
