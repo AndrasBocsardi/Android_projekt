@@ -16,6 +16,8 @@ import com.bumptech.glide.Glide
 import com.zoltanlorinczi.project_retorfit.R
 import com.zoltanlorinczi.project_retrofit.api.ThreeTrackerRepository
 import com.zoltanlorinczi.project_retrofit.api.model.TaskResponse
+import com.zoltanlorinczi.project_retrofit.viewmodel.DepartmentViewModel
+import com.zoltanlorinczi.project_retrofit.viewmodel.DepartmentViewModelFactory
 import com.zoltanlorinczi.project_retrofit.viewmodel.ProfileViewModel
 import com.zoltanlorinczi.project_retrofit.viewmodel.ProfileViewModelFactory
 import kotlinx.android.synthetic.main.fragment_login.*
@@ -29,6 +31,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     }
 
     private lateinit var profileViewModel: ProfileViewModel
+    private lateinit var departmentViewModel: DepartmentViewModel
     private lateinit var logOutButton: Button
     private lateinit var updateProfileButton: Button
 
@@ -37,6 +40,8 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         val factory = ProfileViewModelFactory(ThreeTrackerRepository())
 
         profileViewModel = ViewModelProvider(this, factory)[ProfileViewModel::class.java]
+        departmentViewModel = ViewModelProvider(requireActivity(), DepartmentViewModelFactory(ThreeTrackerRepository()))[DepartmentViewModel::class.java]
+
 
     }
 
@@ -50,9 +55,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
         val myName : TextView = view.findViewById(R.id.myName)
         val email : TextView = view.findViewById(R.id.myEmailTextView)
-        val myJob : TextView = view.findViewById(R.id.myJob)
-        val mentorName : TextView = view.findViewById(R.id.mentorName)
-        val mentorText : TextView = view.findViewById(R.id.mentorText)
+        val myDepartment : TextView = view.findViewById(R.id.myDepartment)
         val phoneNr : TextView = view.findViewById(R.id.phoneNrTextView)
         val location : TextView = view.findViewById(R.id.locationTextView)
         val profilPicture : ImageView = view.findViewById(R.id.myProfileImage)
@@ -61,11 +64,14 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             Log.d(TAG, "Profile = $it")
             myName.text = profileViewModel.profile.value?.firstName + " " + profileViewModel.profile.value?.lastName
             email.text = profileViewModel.profile.value?.email
-
             //TODO
-            myJob.text = "Szamitastechnika"
-            mentorName.text = "Lorinczi Zoltan"
-            mentorText.text = "Lorinczi Zoltan mentorlatja"
+            val myDepartmentId = profileViewModel.profile.value?.departmentId
+            myDepartment.text = myDepartmentId?.let { it1 ->
+                departmentViewModel.getDepartmentNameById(
+                    it1
+                )
+            }
+
 
             phoneNr.text = profileViewModel.profile.value?.phoneNumber
             location.text = profileViewModel.profile.value?.location

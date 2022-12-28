@@ -18,6 +18,7 @@ class ProfileViewModel(private val repository: ThreeTrackerRepository): ViewMode
 
     var profile : MutableLiveData<ProfileResponse?> = MutableLiveData()
 
+    val users: MutableLiveData<List<ProfileResponse?>> = MutableLiveData()
 
 
     init{
@@ -53,6 +54,32 @@ class ProfileViewModel(private val repository: ThreeTrackerRepository): ViewMode
             }
         }
 
+    }
+
+    private suspend fun getUsers(){
+        try {
+            val token: String? = App.sharedPreferences.getStringValue(
+                SharedPreferencesManager.KEY_TOKEN,
+                "Empty token!"
+            )
+            val response = token?.let {
+                repository.getUsers(it)
+            }
+
+            if (response?.isSuccessful == true) {
+                Log.d(TAG, "Get users response: ${response.body()}")
+
+                val userList = response.body()
+                userList?.let {
+                    users.value = it
+                }
+            } else {
+                Log.d(TAG, "Get users error response: ${response?.errorBody()}")
+            }
+
+        } catch (e: Exception) {
+            Log.d(TAG, "ProfileViewModel - getUsers() failed with exception: ${e.message}")
+        }
     }
 
 }

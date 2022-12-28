@@ -33,4 +33,9 @@ interface UserApiService {
     @POST(BackendConstants.POST_UPDATE_PROFILE)
     suspend fun updateProfile(@Body profileRequest : ProfileRequestBody, @Header(BackendConstants.HEADER_TOKEN) token: String): Response<ProfileRequestBody>
 
+    @GET(BackendConstants.GET_USERS)
+    suspend fun getUsers(@Header(BackendConstants.HEADER_TOKEN) token: String): Response<List<ProfileResponse>>
+
+    @GET(BackendConstants.GET_DEPARTMENTS)
+    suspend fun getDepartments(@Header(BackendConstants.HEADER_TOKEN)token: String): Response<List<DepartmentResponse>>
 }
