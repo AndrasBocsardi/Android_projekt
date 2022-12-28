@@ -13,19 +13,12 @@
         <action
             android:id="@+id/action_listFragment_to_taskDetailFragment"
             app:destination="@id/taskDetailFragment" />
-        <action
-            android:id="@+id/action_listFragment_to_createTaskFragment"
-            app:destination="@id/createTaskFragment" />
     </fragment>
     <fragment
         android:id="@+id/activitiesFragment"
         android:name="com.zoltanlorinczi.project_retrofit.fragment.ActivitiesFragment"
         android:label="fragment_activities"
-        tools:layout="@layout/fragment_activities" >
-        <action
-            android:id="@+id/action_activitiesFragment_to_createTaskFragment"
-            app:destination="@id/createTaskFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_activities" />
     <fragment
         android:id="@+id/myGroupsFragment"
         android:name="com.zoltanlorinczi.project_retrofit.fragment.MyGroupsFragment"
@@ -56,4 +49,8 @@
         android:id="@+id/createTaskFragment"
         android:name="com.zoltanlorinczi.project_retrofit.fragment.CreateTaskFragment"
         android:label="CreateTaskFragment" />
+    <fragment
+        android:id="@+id/updateProfileFragment"
+        android:name="com.zoltanlorinczi.project_retrofit.fragment.UpdateProfileFragment"
+        android:label="UpdateProfileFragment" />
 </navigation>

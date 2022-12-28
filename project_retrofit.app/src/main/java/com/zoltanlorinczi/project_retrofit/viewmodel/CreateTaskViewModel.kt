@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.zoltanlorinczi.project_retrofit.App
 import com.zoltanlorinczi.project_retrofit.api.ThreeTrackerRepository
-import com.zoltanlorinczi.project_retrofit.api.model.LoginRequestBody
 import com.zoltanlorinczi.project_retrofit.api.model.TaskRequestBody
 import com.zoltanlorinczi.project_retrofit.manager.SharedPreferencesManager
 import androidx.lifecycle.ViewModel

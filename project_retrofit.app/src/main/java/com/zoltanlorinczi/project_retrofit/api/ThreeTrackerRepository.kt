@@ -36,7 +36,7 @@ class ThreeTrackerRepository {
     }
 
     suspend fun updateProfile(profileRequestBody: ProfileRequestBody, token: String): Response<ProfileRequestBody>{
-        return RetrofitInstance.USER_API_SERVICE.updateProfile(profileRequestBody,token)
+        return RetrofitInstance.USER_API_SERVICE.updateProfile(profileRequestBody, token)
     }
 
 }

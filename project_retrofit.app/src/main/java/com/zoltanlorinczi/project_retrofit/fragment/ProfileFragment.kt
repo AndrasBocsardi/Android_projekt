@@ -30,6 +30,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     private lateinit var profileViewModel: ProfileViewModel
     private lateinit var logOutButton: Button
+    private lateinit var updateProfileButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,7 +67,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             mentorName.text = "Lorinczi Zoltan"
             mentorText.text = "Lorinczi Zoltan mentorlatja"
 
-            phoneNr.text = profileViewModel.profile.value?.phoneNumber.toString()
+            phoneNr.text = profileViewModel.profile.value?.phoneNumber
             location.text = profileViewModel.profile.value?.location
             Glide
                 .with(requireContext())
@@ -79,6 +80,8 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         logOutButton = view.findViewById(R.id.profileLogoutButton)
         logOutButton.setOnClickListener { findNavController().navigate(R.id.loginFragment) }
 
+        updateProfileButton = view.findViewById(R.id.profileUpdateButton)
+        updateProfileButton.setOnClickListener { findNavController().navigate(R.id.updateProfileFragment) }
         return view
     }
 

@@ -14,7 +14,7 @@ data class ProfileRequestBody(
     var location: String,
 
     @SerializedName("phoneNumber")
-    var phoneNumber: Int,
+    var phoneNumber: String,
 
     @SerializedName("imageUrl")
     var imageUrk: String,
