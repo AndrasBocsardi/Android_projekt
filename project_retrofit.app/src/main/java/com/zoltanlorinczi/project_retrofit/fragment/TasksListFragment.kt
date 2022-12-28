@@ -69,6 +69,8 @@ class TasksListFragment : Fragment(R.layout.fragment_tasks_list), TasksListAdapt
             adapter.notifyDataSetChanged()
         }
 
+//        newTaskButton = view.findViewById(R.id.newTaskButton)
+//        newTaskButton.setOnClickListener { findNavController().navigate(R.id.activitiesFragment) }
 
         return view
     }

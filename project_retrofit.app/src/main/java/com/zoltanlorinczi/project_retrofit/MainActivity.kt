@@ -34,6 +34,8 @@ class MainActivity : AppCompatActivity() {
 
         val navController = findNavController(R.id.nav_host_fragment)
 
+
+
 //        val appBarConfiguration = AppBarConfiguration(
 //            setOf(
 //                R.id.activitiesFragment,
@@ -52,6 +54,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.loginFragment -> {
                     bottomNavigationView.visibility = View.GONE
                     navView.visibility = View.GONE
+
                 }
                 else -> {
                     bottomNavigationView.visibility = View.VISIBLE
@@ -60,11 +63,14 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        val actionBar = supportActionBar
+        val newTaskButton: Button
+        newTaskButton = findViewById(R.id.newTaskButton)
+        newTaskButton.setOnClickListener { navController.navigate(R.id.createTaskFragment) }
 
-        if(actionBar != null){
-            actionBar.setDisplayHomeAsUpEnabled(true)
-        }
+
+//        if(actionBar != null){
+//            actionBar.setDisplayHomeAsUpEnabled(true)
+//        }
 
 
     }

@@ -65,11 +65,12 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             myJob.text = "Szamitastechnika"
             mentorName.text = "Lorinczi Zoltan"
             mentorText.text = "Lorinczi Zoltan mentorlatja"
-            phoneNr.text = "0777777777"
-            location.text = "Sepsiszentgyorgy"
+
+            phoneNr.text = profileViewModel.profile.value?.phoneNumber.toString()
+            location.text = profileViewModel.profile.value?.location
             Glide
                 .with(requireContext())
-                .load("https://flyinryanhawks.org/wp-content/uploads/2016/08/profile-placeholder.png")
+                .load(profileViewModel.profile.value?.image)
                 .override(240,240)
                 .fitCenter()
                 .into(profilPicture)

@@ -28,6 +28,8 @@ data class ProfileResponse (
     @SerializedName("department_id")
     var departmentId: Int,
 
-    //TODO IMAGE
+    @SerializedName("image")
+    var image: String,
+
 
         )
