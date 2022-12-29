@@ -16,7 +16,9 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.zoltanlorinczi.project_retorfit.R
+import com.zoltanlorinczi.project_retrofit.App
 import com.zoltanlorinczi.project_retrofit.api.ThreeTrackerRepository
+import com.zoltanlorinczi.project_retrofit.manager.SharedPreferencesManager
 import com.zoltanlorinczi.project_retrofit.viewmodel.DepartmentViewModel
 import com.zoltanlorinczi.project_retrofit.viewmodel.DepartmentViewModelFactory
 import com.zoltanlorinczi.project_retrofit.viewmodel.ProfileViewModel
@@ -91,7 +93,10 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
 
         logOutButton = view.findViewById(R.id.profileLogoutButton)
-        logOutButton.setOnClickListener { findNavController().navigate(R.id.loginFragment) }
+        logOutButton.setOnClickListener {
+            App.sharedPreferences.putStringValue(SharedPreferencesManager.KEY_TOKEN, "")
+            findNavController().navigate(R.id.loginFragment)
+        }
 
         updateProfileButton = view.findViewById(R.id.profileUpdateButton)
         updateProfileButton.setOnClickListener { findNavController().navigate(R.id.updateProfileFragment) }

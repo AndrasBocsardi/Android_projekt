@@ -19,6 +19,7 @@ import com.bumptech.glide.Glide
 import com.zoltanlorinczi.project_retorfit.R
 import com.zoltanlorinczi.project_retrofit.api.model.TaskResponse
 import androidx.navigation.fragment.findNavController
+import com.zoltanlorinczi.project_retrofit.App
 import com.zoltanlorinczi.project_retrofit.fragment.LoginFragment
 import com.zoltanlorinczi.project_retrofit.viewmodel.TasksViewModel
 import interfaces.TaskItemClickListener
@@ -33,7 +34,6 @@ class TasksListAdapter(
     private val context: Context,
     private val listener: OnItemClickListener,
     private val listener2: OnItemLongClickListener,
-    private val clickListener: TaskItemClickListener
 
 ) :
 
@@ -77,7 +77,8 @@ class TasksListAdapter(
 
         override fun onClick(p0: View?) {
             val currentPosition = this.adapterPosition
-            clickListener.onCardClicked(list[currentPosition])
+
+           App.selectedForDetail = list[currentPosition]
             itemView.findNavController().navigate(R.id.action_listFragment_to_taskDetailFragment)
         }
 

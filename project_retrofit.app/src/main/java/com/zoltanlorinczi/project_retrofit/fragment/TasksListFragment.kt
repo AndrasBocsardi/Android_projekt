@@ -37,12 +37,12 @@ class TasksListFragment : Fragment(R.layout.fragment_tasks_list), TasksListAdapt
     private lateinit var adapter: TasksListAdapter
     private lateinit var newTaskButton: Button
 
-    private val taskItemClickListener = object : TaskItemClickListener{
-
-        override fun onCardClicked(task: TaskResponse) {
-            tasksViewModel.selectForDetail(task)
-        }
-    }
+//    private val taskItemClickListener = object : TaskItemClickListener{
+//
+//        override fun onCardClicked(task: TaskResponse) {
+//            tasksViewModel.selectForDetail(task)
+//        }
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,7 +76,7 @@ class TasksListFragment : Fragment(R.layout.fragment_tasks_list), TasksListAdapt
     }
 
     private fun setupRecyclerView() {
-        adapter = TasksListAdapter(ArrayList(), requireContext(), this, this,taskItemClickListener)
+        adapter = TasksListAdapter(ArrayList(), requireContext(), this, this)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this.context)
         recyclerView.addItemDecoration(

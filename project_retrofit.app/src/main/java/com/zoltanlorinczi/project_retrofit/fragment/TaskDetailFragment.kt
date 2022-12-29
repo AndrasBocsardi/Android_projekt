@@ -14,13 +14,11 @@ import com.zoltanlorinczi.project_retorfit.R
 import com.zoltanlorinczi.project_retorfit.databinding.FragmentActivitiesBinding
 import com.zoltanlorinczi.project_retorfit.databinding.FragmentTaskDetailBinding
 import com.zoltanlorinczi.project_retorfit.databinding.SimpleTaskListItemBinding
+import com.zoltanlorinczi.project_retrofit.App
 import com.zoltanlorinczi.project_retrofit.adapter.TasksListAdapter
 import com.zoltanlorinczi.project_retrofit.api.ThreeTrackerRepository
 import com.zoltanlorinczi.project_retrofit.api.model.TaskResponse
-import com.zoltanlorinczi.project_retrofit.viewmodel.ProfileViewModel
-import com.zoltanlorinczi.project_retrofit.viewmodel.ProfileViewModelFactory
-import com.zoltanlorinczi.project_retrofit.viewmodel.TasksViewModel
-import com.zoltanlorinczi.project_retrofit.viewmodel.TasksViewModelFactory
+import com.zoltanlorinczi.project_retrofit.viewmodel.*
 import kotlinx.android.synthetic.main.fragment_task_detail.*
 
 class TaskDetailFragment() : Fragment(R.layout.fragment_task_detail) {
@@ -46,8 +44,7 @@ class TaskDetailFragment() : Fragment(R.layout.fragment_task_detail) {
 
 
         binding = FragmentTaskDetailBinding.inflate(inflater, container, false)
-        currentTask = tasksViewModel.selectedForDetail
-
+        currentTask = App.selectedForDetail
 
         binding.detailedTaskDescriptionView.text = currentTask.description
         binding.detailedTaskTitleView.text = currentTask.title

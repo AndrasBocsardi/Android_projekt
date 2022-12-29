@@ -1,6 +1,7 @@
 package com.zoltanlorinczi.project_retrofit
 
 import android.app.Application
+import com.zoltanlorinczi.project_retrofit.api.model.TaskResponse
 import com.zoltanlorinczi.project_retrofit.manager.SharedPreferencesManager
 
 /**
@@ -14,8 +15,22 @@ import com.zoltanlorinczi.project_retrofit.manager.SharedPreferencesManager
 class App : Application() {
 
     companion object {
+        var selectedForDetail: TaskResponse = TaskResponse(
+            0,
+            "",
+            "",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            ""
+        )
         lateinit var sharedPreferences: SharedPreferencesManager
     }
+
 
     override fun onCreate() {
         super.onCreate()

@@ -5,18 +5,22 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.navigation.fragment.findNavController
 import com.zoltanlorinczi.project_retorfit.R
 import com.zoltanlorinczi.project_retrofit.App
+import com.zoltanlorinczi.project_retrofit.adapter.DepartmentListAdapter
 import com.zoltanlorinczi.project_retrofit.api.ThreeTrackerRepository
 import com.zoltanlorinczi.project_retrofit.manager.SharedPreferencesManager
 import com.zoltanlorinczi.project_retrofit.viewmodel.CreateTaskViewModel
 import com.zoltanlorinczi.project_retrofit.viewmodel.CreateTaskViewModelFactory
+import com.zoltanlorinczi.project_retrofit.viewmodel.UsersViewModel
 
 class CreateTaskFragment : Fragment(){
 
@@ -25,6 +29,7 @@ class CreateTaskFragment : Fragment(){
     }
 
     private lateinit var createTaskViewModel: CreateTaskViewModel
+    private lateinit var usersViewModel: UsersViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +48,7 @@ class CreateTaskFragment : Fragment(){
         val titleEditText: EditText = view.findViewById(R.id.taskName)
         val descriptionEditText: EditText = view.findViewById(R.id.taskDescription)
         val button: Button = view.findViewById(R.id.createTaskButton)
+        //val spinner: Spinner = view.findViewById(R.id.spinner)
 
         Log.d(
             TAG,

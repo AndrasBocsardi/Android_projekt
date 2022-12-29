@@ -23,6 +23,7 @@
         android:id="@+id/taskDescription"
         android:layout_width="353dp"
         android:layout_height="48dp"
+        android:layout_marginTop="12dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Add the task's description"
@@ -42,4 +43,15 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints" />
+
+<!--    <Spinner-->
+<!--        android:id="@+id/spinner"-->
+<!--        android:layout_width="409dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="1dp"-->
+<!--        android:layout_marginTop="24dp"-->
+<!--        android:layout_marginEnd="1dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/taskDescription" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>
