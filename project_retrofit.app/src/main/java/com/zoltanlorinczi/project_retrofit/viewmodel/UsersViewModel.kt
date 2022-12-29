@@ -1,4 +1,4 @@
-package com.zoltanlorinczi.project_retrofit.viewmodel
+package com.zoltanlorinczi.project_retrofit.viewmodel;
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
@@ -10,24 +10,20 @@ import com.zoltanlorinczi.project_retrofit.api.model.ProfileResponse
 import com.zoltanlorinczi.project_retrofit.manager.SharedPreferencesManager
 import kotlinx.coroutines.launch
 
-class ProfileViewModel(private val repository: ThreeTrackerRepository): ViewModel() {
+public class UsersViewModel(private val repository: ThreeTrackerRepository): ViewModel() {
 
     companion object{
         private val TAG: String = javaClass.simpleName
     }
 
-    var profile : MutableLiveData<ProfileResponse?> = MutableLiveData()
-
-    val users: MutableLiveData<List<ProfileResponse?>> = MutableLiveData()
+    val users: MutableLiveData<List<ProfileResponse>> = MutableLiveData()
 
 
     init{
-        getMyProfile()
+        getUsers()
     }
 
-    private fun getMyProfile(){
-        Log.d("ProfileViewModell", "getMyProfile() called")
-
+    private fun getUsers(){
         viewModelScope.launch {
             try {
                 val token: String? = App.sharedPreferences.getStringValue(
@@ -35,26 +31,28 @@ class ProfileViewModel(private val repository: ThreeTrackerRepository): ViewMode
                     "Empty token!"
                 )
                 val response = token?.let {
-                    repository.getMyUser(it)
+                    repository.getUsers(it)
                 }
 
                 if (response?.isSuccessful == true) {
-                    Log.d(TAG, "Get profile response: ${response.body()}")
+                    Log.d(TAG, "Get users response: ${response.body()}")
 
-                    val myProfile = response.body()
-                    myProfile?.let {
-                        profile.value = it
+                    val userList = response.body()
+                    userList?.let {
+                        users.value = userList
                     }
                 } else {
-                    Log.d(TAG, "Get user error response: ${response?.errorBody()}")
+                    Log.d(TAG, "Get users error response: ${response?.errorBody()}")
                 }
 
             } catch (e: Exception) {
-                Log.d(TAG, "ProfileViewModel - getMyProfile() failed with exception: ${e.message}")
+                Log.d(TAG, "UsersViewModel - getUsers() failed with exception: ${e.message}")
             }
         }
-
     }
 
-
+   fun getUsersByDepartmentID(id: Int): List<ProfileResponse?>? {
+        getUsers()
+        return users.value?.filter { it.departmentId  == id  }
+    }
 }

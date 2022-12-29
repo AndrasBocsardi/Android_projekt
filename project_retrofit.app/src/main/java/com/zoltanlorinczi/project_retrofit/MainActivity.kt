@@ -30,12 +30,15 @@ class MainActivity : AppCompatActivity() {
         val binding: ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
+
         val navView: BottomNavigationView = binding.bottomNavigationView
 
         val navController = findNavController(R.id.nav_host_fragment)
 
-
-
+        supportActionBar?.setDisplayShowHomeEnabled(true);
+        supportActionBar?.setDisplayUseLogoEnabled(true);
+//
 //        val appBarConfiguration = AppBarConfiguration(
 //            setOf(
 //                R.id.activitiesFragment,
@@ -54,6 +57,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.loginFragment -> {
                     bottomNavigationView.visibility = View.GONE
                     navView.visibility = View.GONE
+
 
                 }
                 else -> {

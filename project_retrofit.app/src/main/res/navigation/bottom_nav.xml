@@ -20,11 +20,6 @@
         android:label="fragment_activities"
         tools:layout="@layout/fragment_activities" />
     <fragment
-        android:id="@+id/myGroupsFragment"
-        android:name="com.zoltanlorinczi.project_retrofit.fragment.MyGroupsFragment"
-        android:label="fragment_my_groups"
-        tools:layout="@layout/fragment_my_groups" />
-    <fragment
         android:id="@+id/profileFragment"
         android:name="com.zoltanlorinczi.project_retrofit.fragment.ProfileFragment"
         android:label="fragment_profile"
@@ -53,4 +48,13 @@
         android:id="@+id/updateProfileFragment"
         android:name="com.zoltanlorinczi.project_retrofit.fragment.UpdateProfileFragment"
         android:label="UpdateProfileFragment" />
+    <fragment
+        android:id="@+id/departmentFragment"
+        android:name="com.zoltanlorinczi.project_retrofit.fragment.DepartmentFragment"
+        android:label="DepartmentFragment" />
+    <fragment
+        android:id="@+id/myGroupsFragment"
+        android:name="com.zoltanlorinczi.project_retrofit.fragment.MyGroupsFragment"
+        android:label="fragment_my_groups"
+        tools:layout="@layout/fragment_my_groups" />
 </navigation>

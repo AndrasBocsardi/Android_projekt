@@ -1,27 +1,29 @@
 package com.zoltanlorinczi.project_retrofit.fragment
 
-import android.graphics.drawable.Icon
+import android.annotation.SuppressLint
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
 import com.zoltanlorinczi.project_retorfit.R
 import com.zoltanlorinczi.project_retrofit.api.ThreeTrackerRepository
-import com.zoltanlorinczi.project_retrofit.api.model.TaskResponse
 import com.zoltanlorinczi.project_retrofit.viewmodel.DepartmentViewModel
 import com.zoltanlorinczi.project_retrofit.viewmodel.DepartmentViewModelFactory
 import com.zoltanlorinczi.project_retrofit.viewmodel.ProfileViewModel
 import com.zoltanlorinczi.project_retrofit.viewmodel.ProfileViewModelFactory
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_profile.*
+import kotlinx.android.synthetic.main.toolbar.*
 
 
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
@@ -45,6 +47,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     }
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -66,6 +69,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             email.text = profileViewModel.profile.value?.email
             //TODO
             val myDepartmentId = profileViewModel.profile.value?.departmentId
+
             myDepartment.text = myDepartmentId?.let { it1 ->
                 departmentViewModel.getDepartmentNameById(
                     it1
@@ -81,7 +85,10 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                 .override(240,240)
                 .fitCenter()
                 .into(profilPicture)
+
         }
+
+
 
         logOutButton = view.findViewById(R.id.profileLogoutButton)
         logOutButton.setOnClickListener { findNavController().navigate(R.id.loginFragment) }

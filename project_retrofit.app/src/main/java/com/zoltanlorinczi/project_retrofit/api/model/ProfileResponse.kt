@@ -30,6 +30,4 @@ data class ProfileResponse (
 
     @SerializedName("image")
     var image: String,
-
-
         )
