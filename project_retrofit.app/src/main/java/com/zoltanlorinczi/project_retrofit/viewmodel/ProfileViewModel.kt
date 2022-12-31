@@ -18,7 +18,7 @@ class ProfileViewModel(private val repository: ThreeTrackerRepository): ViewMode
 
     var profile : MutableLiveData<ProfileResponse?> = MutableLiveData()
 
-    val users: MutableLiveData<List<ProfileResponse?>> = MutableLiveData()
+    var isLoggedIn : MutableLiveData<Boolean> = MutableLiveData()
 
 
     init{
@@ -44,13 +44,16 @@ class ProfileViewModel(private val repository: ThreeTrackerRepository): ViewMode
                     val myProfile = response.body()
                     myProfile?.let {
                         profile.value = it
+                        isLoggedIn.value = true
                     }
                 } else {
                     Log.d(TAG, "Get user error response: ${response?.errorBody()}")
+                    isLoggedIn.value = false
                 }
 
             } catch (e: Exception) {
                 Log.d(TAG, "ProfileViewModel - getMyProfile() failed with exception: ${e.message}")
+                isLoggedIn.value = false
             }
         }
 
