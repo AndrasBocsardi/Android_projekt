@@ -3,6 +3,8 @@ package com.zoltanlorinczi.project_retrofit
 import android.app.Application
 import com.zoltanlorinczi.project_retrofit.api.model.TaskResponse
 import com.zoltanlorinczi.project_retrofit.manager.SharedPreferencesManager
+import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * Base class of Android app, containing components like Activities and Services.
@@ -28,7 +30,14 @@ class App : Application() {
             0,
             ""
         )
+        
         lateinit var sharedPreferences: SharedPreferencesManager
+
+        fun epochToDateString(epoch: Long): String {
+            val date = Date(epoch * 1000)
+            val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
+            return dateFormat.format(date)
+        }
     }
 
 
@@ -36,4 +45,5 @@ class App : Application() {
         super.onCreate()
         sharedPreferences = SharedPreferencesManager(applicationContext)
     }
+
 }

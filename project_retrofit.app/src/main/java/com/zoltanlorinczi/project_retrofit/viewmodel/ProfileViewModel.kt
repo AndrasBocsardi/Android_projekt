@@ -59,5 +59,10 @@ class ProfileViewModel(private val repository: ThreeTrackerRepository): ViewMode
 
     }
 
+    fun getMyDepartmentId(): Int{
+        getMyProfile()
+        return profile.value?.departmentId ?: -1
+    }
+
 
 }

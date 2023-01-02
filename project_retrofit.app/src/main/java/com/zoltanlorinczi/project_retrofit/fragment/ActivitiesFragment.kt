@@ -1,60 +1,83 @@
 package com.zoltanlorinczi.project_retrofit.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toolbar
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.zoltanlorinczi.project_retorfit.R
+import com.zoltanlorinczi.project_retrofit.adapter.ActivitiesAdapter
+import com.zoltanlorinczi.project_retrofit.api.ThreeTrackerRepository
+import com.zoltanlorinczi.project_retrofit.api.model.ActivityResponse
+import com.zoltanlorinczi.project_retrofit.viewmodel.ActivitiesViewModel
+import com.zoltanlorinczi.project_retrofit.viewmodel.ActivitiesViewModelFactory
+import com.zoltanlorinczi.project_retrofit.viewmodel.UsersViewModel
+import com.zoltanlorinczi.project_retrofit.viewmodel.UsersViewModelFactory
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class ActivitiesFragment : Fragment(R.layout.fragment_tasks_list), ActivitiesAdapter.OnItemClickListener,
+    ActivitiesAdapter.OnItemLongClickListener {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [activitiesFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class ActivitiesFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    companion object {
+        private val TAG: String = javaClass.simpleName
+    }
+
+    private lateinit var activitiesViewModel: ActivitiesViewModel
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: ActivitiesAdapter
+    private lateinit var usersViewModel: UsersViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+        val factory = ActivitiesViewModelFactory(ThreeTrackerRepository())
+        activitiesViewModel = ViewModelProvider(this, factory)[ActivitiesViewModel::class.java]
+        usersViewModel =ViewModelProvider(requireActivity(), UsersViewModelFactory(ThreeTrackerRepository()))[UsersViewModel::class.java]
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_activities, container, false)
+        val view = inflater.inflate(R.layout.fragment_activities, container, false)
+        recyclerView = view.findViewById(R.id.recycler_view)
+        setupRecyclerView()
+        activitiesViewModel.products.observe(viewLifecycleOwner) {
+            Log.d(TAG, "Activities list = $it")
+            adapter.setData(activitiesViewModel.products.value as ArrayList<ActivityResponse>)
+            adapter.notifyDataSetChanged()
+
+        }
+
+
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment activitiesFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ActivitiesFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    private fun setupRecyclerView() {
+        adapter = ActivitiesAdapter(ArrayList(), this.requireContext(), this, this, usersViewModel)
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(this.context)
+        recyclerView.addItemDecoration(
+            DividerItemDecoration(
+                activity,
+                DividerItemDecoration.VERTICAL
+            )
+        )
+        recyclerView.setHasFixedSize(true)
+    }
+
+    override fun onItemClick(position: Int) {
+//        TODO("Not yet implemented")
+    }
+
+    override fun onItemLongClick(position: Int) {
+//        TODO("Not yet implemented")
     }
 }

@@ -34,15 +34,9 @@ class SplashFragment : Fragment() {
         (requireActivity() as AppCompatActivity).supportActionBar?.hide()
 
         profileViewModel.isLoggedIn.observe(viewLifecycleOwner){
-            if (it==true){
-                Thread.sleep(2000)
-                findNavController().navigate(R.id.listFragment)
-            }
-            else
-            {
+
                 Thread.sleep(2000)
                 findNavController().navigate(R.id.loginFragment)
-            }
         }
         return view
     }

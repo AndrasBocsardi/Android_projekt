@@ -56,15 +56,10 @@ public class UsersViewModel(private val repository: ThreeTrackerRepository): Vie
         return users.value?.filter { it.departmentId  == id  }
     }
 
-//    fun getUserNames(): List<String>{
-//        val usersList: List<ProfileResponse> = users.value!!
-//
-//        val names List<String>
-//            if(usersList != null){
-//                for (user in usersList){
-//                    (user.firstName +" " + user.lastName)
-//                }
-//            }
-//
-//    }
+    fun getUserNameByID(id: Int): String {
+        getUsers()
+        val user = users.value?.singleOrNull{it.id == id}
+
+        return (user?.firstName ?:"") + " " + (user?.lastName ?:"")
+    }
 }

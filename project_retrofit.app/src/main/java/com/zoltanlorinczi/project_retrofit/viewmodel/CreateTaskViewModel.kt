@@ -10,9 +10,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-
 class CreateTaskViewModel(private val repository: ThreeTrackerRepository): ViewModel() {
     companion object {
         private val TAG: String = javaClass.simpleName
@@ -25,7 +22,7 @@ class CreateTaskViewModel(private val repository: ThreeTrackerRepository): ViewM
         description: String,
         assignedToUserId: Int,
         priority: Int,
-        deadline: Int,
+        deadline: Long,
         departmentId: Int,
         status: Int
     ) {

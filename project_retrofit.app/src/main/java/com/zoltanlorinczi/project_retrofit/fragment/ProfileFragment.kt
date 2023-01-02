@@ -95,7 +95,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         logOutButton = view.findViewById(R.id.profileLogoutButton)
         logOutButton.setOnClickListener {
             App.sharedPreferences.putStringValue(SharedPreferencesManager.KEY_TOKEN, "")
-            findNavController().navigate(R.id.loginFragment)
+            findNavController().navigate(R.id.splashFragment)
         }
 
         updateProfileButton = view.findViewById(R.id.profileUpdateButton)

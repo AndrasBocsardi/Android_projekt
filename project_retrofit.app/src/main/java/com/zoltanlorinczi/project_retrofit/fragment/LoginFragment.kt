@@ -75,7 +75,7 @@ class LoginFragment : Fragment() {
                 if (it) {
 
 
-                    findNavController().navigate(R.id.action_loginFragment_to_listFragment)
+                    findNavController().navigate(R.id.listFragment)
                 }
             }
         }

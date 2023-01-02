@@ -16,7 +16,7 @@ data class TaskRequestBody(
     var priority: Int,
 
     @SerializedName("deadline")
-    var deadline: Int,
+    var deadline: Long,
 
     @SerializedName("departmentId")
     var departmentId: Int,

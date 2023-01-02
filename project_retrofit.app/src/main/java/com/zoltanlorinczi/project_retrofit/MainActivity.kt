@@ -39,19 +39,8 @@ class MainActivity : AppCompatActivity() {
 
         val navController = findNavController(R.id.nav_host_fragment)
 
-        supportActionBar?.setDisplayShowHomeEnabled(true);
-        supportActionBar?.setDisplayUseLogoEnabled(true);
-//
-//        val appBarConfiguration = AppBarConfiguration(
-//            setOf(
-//                R.id.activitiesFragment,
-//                R.id.listFragment,
-//                R.id.myGroupsFragment,
-//                R.id.profileFragment
-//
-//            )
-//        )
-//        setupActionBarWithNavController(navController, appBarConfiguration)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+        supportActionBar?.setDisplayUseLogoEnabled(true)
 
         navView.setupWithNavController(navController)
 

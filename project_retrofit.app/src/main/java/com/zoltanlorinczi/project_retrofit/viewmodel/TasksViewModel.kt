@@ -22,19 +22,6 @@ class TasksViewModel(private val repository: ThreeTrackerRepository) : ViewModel
 
     var tasks: MutableLiveData<List<TaskResponse>> = MutableLiveData()
 
-//    var selectedForDetail: TaskResponse = TaskResponse(
-//        0,
-//        "",
-//        "",
-//        0,
-//        0,
-//        0,
-//        0,
-//        0,
-//        0,
-//        0,
-//        ""
-//    )
 
     init {
         getTasks()
@@ -68,7 +55,5 @@ class TasksViewModel(private val repository: ThreeTrackerRepository) : ViewModel
         }
     }
 
-//    fun selectForDetail(task: TaskResponse) {
-//        selectedForDetail = task
-//    }
+
 }
