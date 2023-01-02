@@ -10,10 +10,6 @@ import com.zoltanlorinczi.project_retrofit.api.model.TaskResponse
 import com.zoltanlorinczi.project_retrofit.manager.SharedPreferencesManager
 import kotlinx.coroutines.launch
 
-/**
- * Author:  Zoltan Lorinczi
- * Date:    12/6/2021
- */
 class TasksViewModel(private val repository: ThreeTrackerRepository) : ViewModel() {
 
     companion object {

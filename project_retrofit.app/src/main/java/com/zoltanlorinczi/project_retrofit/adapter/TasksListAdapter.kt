@@ -23,6 +23,7 @@ import com.zoltanlorinczi.project_retrofit.App
 import com.zoltanlorinczi.project_retrofit.fragment.LoginFragment
 import com.zoltanlorinczi.project_retrofit.viewmodel.TasksViewModel
 import interfaces.TaskItemClickListener
+import java.text.SimpleDateFormat
 
 
 /**
@@ -66,6 +67,7 @@ class TasksListAdapter(
         val taskTitleTextView: TextView = itemView.findViewById(R.id.task_title_view)
         val taskDescriptionTextView: TextView = itemView.findViewById(R.id.task_description_view)
         val taskPriorityTextView: TextView = itemView.findViewById(R.id.task_priority_view)
+        val dueDateTextView: TextView = itemView.findViewById(R.id.tasks_due_date)
 
 
 
@@ -134,10 +136,11 @@ class TasksListAdapter(
             val complexHolder = (holder as DataViewHolder)
             val currentItem = list[position]
 
-
+            val simpleDateFormat = SimpleDateFormat("dd/mm/yyyy")
+            val dateString = simpleDateFormat.format(currentItem.deadline)
             complexHolder.taskTitleTextView.text = currentItem.title
             complexHolder.taskDescriptionTextView.text = currentItem.description
-
+            complexHolder.dueDateTextView.text = dateString
 
             when (currentItem.priority) {
                 0 -> {

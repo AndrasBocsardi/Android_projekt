@@ -12,10 +12,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-/**
- * Author:  Zoltan Lorinczi
- * Date:    11/8/2021
- */
 class LoginViewModel(private val repository: ThreeTrackerRepository) : ViewModel() {
 
     companion object {

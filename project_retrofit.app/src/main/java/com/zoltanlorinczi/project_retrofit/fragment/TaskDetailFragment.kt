@@ -20,6 +20,7 @@ import com.zoltanlorinczi.project_retrofit.api.ThreeTrackerRepository
 import com.zoltanlorinczi.project_retrofit.api.model.TaskResponse
 import com.zoltanlorinczi.project_retrofit.viewmodel.*
 import kotlinx.android.synthetic.main.fragment_task_detail.*
+import java.text.SimpleDateFormat
 
 class TaskDetailFragment() : Fragment(R.layout.fragment_task_detail) {
 
@@ -46,6 +47,10 @@ class TaskDetailFragment() : Fragment(R.layout.fragment_task_detail) {
         binding = FragmentTaskDetailBinding.inflate(inflater, container, false)
         currentTask = App.selectedForDetail
 
+        val simpleDateFormat = SimpleDateFormat("dd/mm/yyyy")
+        val dateString = simpleDateFormat.format(currentTask.deadline)
+
+        binding.detailedDueData.text = dateString
         binding.detailedTaskDescriptionView.text = currentTask.description
         binding.detailedTaskTitleView.text = currentTask.title
         binding.detailedTaskPriorityView.text = currentTask.priority.toString()

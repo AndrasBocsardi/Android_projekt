@@ -86,7 +86,7 @@ class CreateTaskFragment : Fragment(){
 
 
 
-            createTaskViewModel.createTask(titleEditText.text.toString(), descriptionEditText.text.toString(), assignedToUserID.text.toString().toInt(), 1, mydate.time, departmentId, 1)
+            createTaskViewModel.createTask(titleEditText.text.toString(), descriptionEditText.text.toString(), assignedToUserID.text.toString().toInt(), 1, mydate.time, 2, 1)
 
             createTaskViewModel.isSuccessful.observe(this.viewLifecycleOwner) {
                 Log.d(TAG, "Task created successfully = $it")

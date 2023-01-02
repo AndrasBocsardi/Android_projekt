@@ -41,7 +41,7 @@ class MyGroupsFragment : Fragment(R.layout.fragment_my_groups) {
         )[DepartmentViewModel::class.java]
     }
 
-    @SuppressLint("MissingInflatedId")
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
